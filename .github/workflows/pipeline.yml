@@ -78,10 +78,12 @@ jobs:
         name: greetings-jar
       
     - name: Execute test
+      env:
+        ARGS: ${{ github.event.inputs.myValues }}
       shell: bash
       run: | 
         chmod +x ./test-script.sh
-        ./test-script.sh ${{ needs.build.outputs.artifact-path }} ${{ github.event.inputs.myValues }}
+        ./test-script.sh ${{ needs.build.outputs.artifact-path }} "$ARGS"
         
   count-args:
       
